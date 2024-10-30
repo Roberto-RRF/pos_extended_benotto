@@ -1,0 +1,36 @@
+<odoo>
+    <record id="point_of_sale.view_pos_order_filter" model="ir.ui.view">
+        <field name="name">Search Sales Order</field>
+        <field name="model">pos.order</field>
+        <field name="arch" type="xml">
+            <search string="Search Sales Order">
+                <field name="name"/>
+                <field name="pos_reference"/>
+                <field name="date_order"/>
+                <field name="tracking_number"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="session_id"/>
+                <field name="config_id"/>
+                <field name="lines" string="Product" filter_domain="[('lines.product_id', 'ilike', self)]"/>
+
+                <field name="sh_pos_order_analytic_account"/>
+
+
+                <filter string="Invoiced" name="invoiced" domain="[('state', '=', 'invoiced')]"/>
+                <filter string="Posted" name="posted" domain="[('state', '=', 'done')]"/>
+                <separator/>
+                <filter string="Order Date" name="order_date" date="date_order"/>
+                <group expand="0" string="Group By">
+                    <filter string="Session" name="session" domain="[]" context="{'group_by': 'session_id'}"/>
+                    <filter string="User" name="user_id" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter string="Point of Sale" name="config_id" domain="[]" context="{'group_by': 'config_id'}"/>
+                    <filter string="Customer" name="customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Order Date" name="order_month" domain="[]" context="{'group_by': 'date_order'}"/>
+                    <filter string="Analytic Account" name="group_by_analytic_account" context="{'group_by': 'sh_pos_order_analytic_account'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

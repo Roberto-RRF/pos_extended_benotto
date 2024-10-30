@@ -1,0 +1,51 @@
+<odoo>
+    <record id="view_pos_config_tree_inherit" model="ir.ui.view">
+        <field name="name">pos.config.tree.inherit</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="sh_analytic_account"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="region"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_pos_config_form_inherit" model="ir.ui.view">
+        <field name="name">pos.config.form.inherit</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='other_devices']" position="after">
+                <setting title="Region" string="Region Punto de Venta" help="Ingresa la region del punto de venta.">
+                    <field name="region"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_pos_config_kanban_inherit" model="ir.ui.view">
+        <field name="name">pos.config.kanban.inherit</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_config_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_kanban_card_header')]"  position="inside">
+            <div>
+                <div>
+                    <strong>Cuenta analítica: </strong>
+                    <field name="sh_analytic_account"/>
+                </div>
+                <div>
+                    <strong>Region: </strong>
+                    <field name="region"/>
+                </div>
+            </div>
+
+            </xpath> 
+        </field>
+    </record>
+</odoo>
